@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div>
       <h1>Infection Deck</h1>
-      <card-deck [cards]="infectionCards"></card-deck>
+      <card-deck 
+        [cards]="infectionCards"
+        (currentCard)="currentInfectionCard = $event">
+      </card-deck>
 
       <h1>Play Deck</h1>
       <card-deck [cards]="playCards"></card-deck>
+
+      <world
+        [places]="infectionCards"
+        [currentlyInfecting]="currentInfectionCard">
+      </world>
     </div>
   `,
   styleUrls: ['./board.component.scss']
@@ -18,6 +26,7 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
   infectionCards;
   playCards;
+  currentInfectionCard;
 
   ngOnInit () {
     this.infectionCards = [
