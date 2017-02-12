@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -18,6 +18,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 export class CardDeckComponent implements OnInit {
   @Input() cards = [];
+  @Output() currentCard: EventEmitter<any> = new EventEmitter();
   topCard;
   cardIndex: number;
   endGame;
@@ -33,6 +34,7 @@ export class CardDeckComponent implements OnInit {
 
   drawCard () {
     this.cardIndex = Math.floor(Math.random() * this.cards.length);
+    this.currentCard.emit(this.cards[this.cardIndex] || this.endGame);
     return this.cards[this.cardIndex] || this.endGame;
   }
 
