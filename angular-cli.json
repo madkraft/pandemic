@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.0.0-beta.25.5",
-    "name": "tesla-range-calculator"
+    "name": "pandemic"
   },
   "apps": [
     {
@@ -18,7 +18,7 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [],
       "environments": {

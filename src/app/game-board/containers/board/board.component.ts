@@ -5,19 +5,30 @@ import { Component, OnInit } from '@angular/core';
   selector: 'board',
   template: `
     <div>
-      <h1>Infection Deck</h1>
-      <card-deck 
-        [cards]="infectionCards"
-        (currentCard)="currentInfectionCard = $event">
-      </card-deck>
+      <button (click)="nextTurn()">Next turn</button>
+      <h1>Current turn: {{ currentTurn.descr }}</h1>
+      <div class="row">
+        <card-deck
+          class="col-xs-12" 
+          [cards]="infectionCards"
+          (currentCard)="currentInfectionCard = $event">
+        </card-deck>
+      </div>
 
-      <h1>Play Deck</h1>
-      <card-deck [cards]="playCards"></card-deck>
+      <div class="row">
+        <world
+          class="col-xs-12"
+          [places]="infectionCards"
+          [currentlyInfecting]="currentInfectionCard">
+        </world>
+      </div>
 
-      <world
-        [places]="infectionCards"
-        [currentlyInfecting]="currentInfectionCard">
-      </world>
+      <div class="row">
+        <card-deck 
+          class="col-xs-12"
+          [cards]="playCards">
+        </card-deck>
+      </div>
     </div>
   `,
   styleUrls: ['./board.component.scss']
@@ -27,6 +38,8 @@ export class BoardComponent implements OnInit {
   infectionCards;
   playCards;
   currentInfectionCard;
+  currentTurn;
+  turns;
 
   ngOnInit () {
     this.infectionCards = [
@@ -74,5 +87,16 @@ export class BoardComponent implements OnInit {
         color: '#c01025'
       }
     ];
+
+    this.turns = [
+      {turn: 0, descr: 'Players receive cards'},
+      {turn: 1, descr: 'Infecting world'}
+    ];
+
+    this.currentTurn = this.turns[0];
+  }
+
+  nextTurn () {
+    this.currentTurn = this.turns[this.currentTurn.turn + 1] || this.turns[0];
   }
 }
