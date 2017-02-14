@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div>
       <button (click)="nextTurn()">Next turn</button>
-      <h1>Current turn: {{ currentTurn.descr }}</h1>
+      <h3 class="">Current turn: {{ currentTurn.descr }}</h3>
       <div class="row">
         <card-deck
           class="col-xs-12" 
@@ -39,7 +39,8 @@ export class BoardComponent implements OnInit {
   playCards;
   currentInfectionCard;
   currentTurn;
-  turns;
+  gameTurns;
+  playerTurns;
 
   ngOnInit () {
     this.infectionCards = [
@@ -88,15 +89,21 @@ export class BoardComponent implements OnInit {
       }
     ];
 
-    this.turns = [
-      {turn: 0, descr: 'Players receive cards'},
-      {turn: 1, descr: 'Infecting world'}
+    this.gameTurns = [
+      {stage: 0, descr: 'Players receive cards'},
+      {stage: 1, descr: 'Infecting world'},
     ];
 
-    this.currentTurn = this.turns[0];
+    this.playerTurns = [
+      {stage: 0, descr: 'Action (Max. 4)'},
+      {stage: 1, descr: 'Draw additional cards'},
+      {stage: 2, descr: 'New infections'},
+    ];
+
+    this.currentTurn = this.gameTurns[0];
   }
 
   nextTurn () {
-    this.currentTurn = this.turns[this.currentTurn.turn + 1] || this.turns[0];
+    this.currentTurn = this.gameTurns[this.currentTurn.stage + 1] || this.gameTurns[0];
   }
 }
