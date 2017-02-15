@@ -26,8 +26,13 @@ import { Component, OnInit } from '@angular/core';
       <div class="row">
         <card-deck 
           class="col-xs-12"
-          [cards]="playCards">
+          [cards]="playCards"
+          (currentCard)="takeCard($event)">
         </card-deck>
+      </div>
+
+      <div>
+        <cards-on-hand [cards]="playerCards"></cards-on-hand>
       </div>
     </div>
   `,
@@ -41,6 +46,7 @@ export class BoardComponent implements OnInit {
   currentTurn;
   gameTurns;
   playerTurns;
+  playerCards: Array<any>;
 
   ngOnInit () {
     this.infectionCards = [
@@ -101,9 +107,26 @@ export class BoardComponent implements OnInit {
     ];
 
     this.currentTurn = this.gameTurns[0];
+
+    this.playerCards = [];
   }
 
   nextTurn () {
     this.currentTurn = this.gameTurns[this.currentTurn.stage + 1] || this.gameTurns[0];
+    // this.takeCard();
+    // this.checkTurn();
+  }
+
+  // checkTurn () {
+  //   if (this.currentTurn.stage === ) {
+      
+  //   } else {
+      
+  //   }
+  // }
+
+  takeCard (card) {
+    this.playerCards = [...this.playerCards, card];
+    console.log(this.playerCards)
   }
 }

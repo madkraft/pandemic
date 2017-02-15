@@ -6,19 +6,15 @@ import { NgModule } from '@angular/core';
 import { BoardComponent } from './containers/board/board.component';
 import { CardDeckComponent } from './components/card-deck/card-deck.component';
 import { WorldComponent } from './components/world/world.component';
-// import { TeslaStatsComponent } from './components/tesla-stats/tesla-stats.component';
-// import { TeslaCounterComponent } from './components/tesla-counter/tesla-counter.component';
-// import { TeslaClimateComponent } from './components/tesla-climate/tesla-climate.component';
-// import { TeslaWheelsComponent } from './components/tesla-wheels/tesla-wheels.component';
+import { CardsOnHandComponent } from './components/cards-on-hand/cards-on-hand.component';
+
 
 @NgModule({
   declarations: [
     BoardComponent,
     CardDeckComponent,
-    WorldComponent
-    // TeslaCounterComponent,
-    // TeslaClimateComponent,
-    // TeslaWheelsComponent
+    WorldComponent,
+    CardsOnHandComponent
   ],
   imports: [
     CommonModule,
